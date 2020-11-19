@@ -2,11 +2,11 @@ const { Model, Sequelize } = require('sequelize');
 const sequelize = require('../database/index')
 class Media extends Model {}
 Media.init({
-fileUrl:Sequelize.String,
-duration:Sequelize.Integer,
-isVideo : Sequelize.Boolean,
-postID : Sequelize.Integer
+fileUrl:Sequelize.STRING,
+duration:Sequelize.INTEGER,
+isVideo : Sequelize.BOOLEAN,
+postID : Sequelize.INTEGER
 
-}, { sequelize, modelName: 'Media' });
+}, { sequelize, modelName: 'media' });
 
 module.exports = Media;

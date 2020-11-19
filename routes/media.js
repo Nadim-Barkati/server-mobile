@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
       where: { fileUrl: req.body.fileUrl },
     });
     await Users.create({
-        fileUrl:Sequelize.String,
-        duration:Sequelize.Integer,
-        isVideo : Sequelize.Boolean,
-        postID : Sequelize.Integer
+        fileUrl:req.body.fileUrl,
+        duration:req.body.duration,
+        isVideo : req.body.isVideo,
+        postID : req.body.post
     }).then((user) => res.json(user));
   });
 
