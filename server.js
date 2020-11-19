@@ -17,7 +17,9 @@ app.use('/Comment',require("./routes/CommentsRoutes.js"));
 // app.use('/Post',require("./routes/PostRoutes.js"));
 // app.use('/Likes',require("./routes/LikesRoutes.js"));
 
-
+app.get('/', () => {
+  console.log('hello');
+})
   
 
 
