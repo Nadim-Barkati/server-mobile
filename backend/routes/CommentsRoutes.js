@@ -1,37 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const Comments = require('../Models/CommentSchema.js');
-const user = require('../Models/UserSchema.js');
-
+const Comment = require('../models/CommentSchema');
 
 router.get('/', async(req, res) => {
-    await Comments.findAll().then((comments) => res.json(comments))
+    await Comment.findAll().then((comments) => res.json(comments))
         .catch((err) => console.log(err))
 })
 
 router.get('/:id', async(req, res) => {
-    await Comments.findByPk(req.params.id).then((comments) => res.json(comments))
+    await Comment.findByPk(req.params.id).then((comments) => res.json(comments))
         .catch((err) => console.log(err))
 })
 
 router.post('/addComment', async(req, res) => {
-    await Comments.create({
-        
-            IDPost: req.body.IDPost,
-            UserId: req.body.UserId,
-            Content: req.body.Content,
-            timestamp: req.body.timestamp,
+    console.log(req.body)
+    await Comment.create({
+            idPost: req.body.idPost,
+            userId: req.body.userId,
+            content: req.body.content,
         })
-        .then((user) => res.json(user))
+        .then((comment) => res.json(comment))
         .catch((err) => console.log(err))
 })
 
 router.put('/:id', async(req, res) => {
-    Comments.findByPk(req.params.id).then(() => {
+    Comment.findByPk(req.params.id).then(() => {
         comments.update({
-            Content: req.body.Content,
-            timestamp: req.body.timestamp,
-
+            content: req.body.Content,
+           
             }).then((comments) => {
                 res.json(comments);
             });
@@ -40,7 +36,7 @@ router.put('/:id', async(req, res) => {
 })
 
 router.delete('/:id', async(req, res) => {
-    await Comments.findByPk(req.params.id).then((comments) => {
+    await Comment.findByPk(req.params.id).then((comments) => {
             comments.destroy();
         }).then(() => {
             res.json("deleted");
@@ -49,7 +45,7 @@ router.delete('/:id', async(req, res) => {
 });
 
 router.delete('/', async(req, res) => {
-    await Comments.destroy({ where: {}, truncate: true }).then(() => res.json("cleared"))
+    await Comment.destroy({ where: {}, truncate: true }).then(() => res.json("cleared"))
         .catch((err) => console.log(err))
 });
 
