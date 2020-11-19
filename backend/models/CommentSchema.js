@@ -1,9 +1,10 @@
 const { Model, Sequelize } = require('sequelize');
-const sequelize = require('../index')
+const sequelize = require('../database/index')
 class Comment extends Model {}
 Comment.init({
-    IDPost: Sequelize.INTEGER,
-    UserId: Sequelize.INTEGER,
-    Content: Sequelize.STRING,
-    timestamp: Sequelize.INTEGER,
-}, { sequelize, modelName: 'comment' });
+    idPost: Sequelize.INTEGER,
+    userId: Sequelize.INTEGER,
+    content: Sequelize.STRING,
+}, { sequelize, modelName: 'comment' , timestamp : true  });
+
+module.exports = Comment ;

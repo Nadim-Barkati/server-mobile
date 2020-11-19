@@ -1,5 +1,5 @@
 const { Model, Sequelize } = require('sequelize');
-const sequelize = require('../index')
+const sequelize = require('../database/index');
 class Post extends Model {}
 Post.init({
     Content: Sequelize.STRING,
@@ -8,3 +8,4 @@ Post.init({
     timestamp: Sequelize.INTEGER,
 }, { sequelize, modelName: 'post' });
 
+module.exports = Post;
