@@ -1,21 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const Comments = require('../Models/CommentSchema.js');
-const user = require('../Models/UserSchema.js');
-
+const comment = require('../models/CommentSchema');
 
 router.get('/', async(req, res) => {
-    await Comments.findAll().then((comments) => res.json(comments))
+    await comment.findAll().then((comments) => res.json(comments))
         .catch((err) => console.log(err))
 })
 
 router.get('/:id', async(req, res) => {
-    await Comments.findByPk(req.params.id).then((comments) => res.json(comments))
+    await comment.findByPk(req.params.id).then((comments) => res.json(comments))
         .catch((err) => console.log(err))
 })
 
 router.post('/addComment', async(req, res) => {
-    await Comments.create({
+    await comment.create({
         
             IDPost: req.body.IDPost,
             UserId: req.body.UserId,
@@ -27,7 +25,7 @@ router.post('/addComment', async(req, res) => {
 })
 
 router.put('/:id', async(req, res) => {
-    Comments.findByPk(req.params.id).then(() => {
+    comment.findByPk(req.params.id).then(() => {
         comments.update({
             Content: req.body.Content,
             timestamp: req.body.timestamp,
@@ -40,7 +38,7 @@ router.put('/:id', async(req, res) => {
 })
 
 router.delete('/:id', async(req, res) => {
-    await Comments.findByPk(req.params.id).then((comments) => {
+    await comment.findByPk(req.params.id).then((comments) => {
             comments.destroy();
         }).then(() => {
             res.json("deleted");
@@ -49,7 +47,7 @@ router.delete('/:id', async(req, res) => {
 });
 
 router.delete('/', async(req, res) => {
-    await Comments.destroy({ where: {}, truncate: true }).then(() => res.json("cleared"))
+    await comment.destroy({ where: {}, truncate: true }).then(() => res.json("cleared"))
         .catch((err) => console.log(err))
 });
 
