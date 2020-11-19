@@ -7,6 +7,6 @@ Adress.init({
     country: Sequelize.STRING,
     zipcode: Sequelize.INTEGER,
     userId: Sequelize.INTEGER,
-    }, { sequelize, modelName: 'Adress' });
+    }, { sequelize, modelName: 'adress' });
     
     module.exports = Adress;
