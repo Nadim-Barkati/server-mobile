@@ -1,5 +1,5 @@
 const { Model, Sequelize } = require('sequelize');
-const sequelize = require('../database/index')
+const sequelize = require('../database/index');
 class Post extends Model {}
 Post.init({
     Content: Sequelize.STRING,
