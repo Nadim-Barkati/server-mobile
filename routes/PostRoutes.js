@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/PostSchema');
-const Op=sequelize.Sequelize.Op
+const Sequelize = require('sequelize');
+const Op=Sequelize.Op
 
 
 //add a post
