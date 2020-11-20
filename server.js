@@ -8,14 +8,16 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
+// helmet
+// sequelize
+// 
 
 app.use('/User', require("./routes/User.js"));
 app.use('/Media', require("./routes/media.js"));
 app.use('/Adress', require("./routes/adress.js"));
 app.use('/Comment',require("./routes/CommentsRoutes.js"));
-// app.use('/Post',require("./routes/PostRoutes.js"));
-// app.use('/Likes',require("./routes/LikesRoutes.js"));
+app.use('/Post',require("./routes/PostRoutes.js"));
+app.use('/Likes',require("./routes/LikesRoutes.js"));
 
 app.get('/', function (req,res) {
   res.send('Hello');

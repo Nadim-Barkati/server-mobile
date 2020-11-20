@@ -4,6 +4,9 @@ const Media = require('../models/mediaSchema');
 
 
 router.get('/', async (req, res) => {
+  //it must be maybe media instead of user!
+  //can we add acondition
+
     await Media.findAll().then((media) => res.json(media))
   })
   router.get('/:id', async (req, res) => {
@@ -11,13 +14,12 @@ router.get('/', async (req, res) => {
   })
   router.post("/AddMedia", async (req, res) => {
     console.log(req.body)
-    await Users.create({
+    await Media.create({
         fileUrl:req.body.fileUrl,
         duration:req.body.duration,
         isVideo : req.body.isVideo,
-        postID : req.body.post
-    })
-    .then((adress) => res.json(adress))
+        postID : req.body.postID,
+    }).then((media) => res.json(media))
     .catch((err) => console.log(err))
   })
 router.put("/:id",async (req, res)=>{
