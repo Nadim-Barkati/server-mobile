@@ -14,17 +14,12 @@ router.get('/', async (req, res) => {
   })
   router.post("/AddMedia", async (req, res) => {
     console.log(req.body)
-    await Users.create({
+    await Media.create({
         fileUrl:req.body.fileUrl,
         duration:req.body.duration,
         isVideo : req.body.isVideo,
-        postID : req.body.post,
-        //it must be maybe media instead of user!
-    }).then((user) => res.json(user));
-  });
-        postID : req.body.post
-    })
-    .then((adress) => res.json(adress))
+        postID : req.body.postID,
+    }).then((media) => res.json(media))
     .catch((err) => console.log(err))
   })
 router.put("/:id",async (req, res)=>{

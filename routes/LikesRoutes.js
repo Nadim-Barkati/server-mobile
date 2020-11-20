@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Likes = require('../models/LikesSchema');
-const Op=sequelize.Sequelize.Op
+const Sequelize = require('sequelize');
+const Op=Sequelize.Op
 
 
 //add a like
 router.post('/addLike', async(req, res) => {
     console.log(req.body)
-    await like.create({
+    await Likes.create({
             IdPost: req.body.IdPost,
             userId: req.body.userId,
         })
@@ -18,7 +19,7 @@ router.post('/addLike', async(req, res) => {
 
 //delete post
 router.delete('/:id', async(req, res) => {
-    await like.findByPk(req.params.id).then((like) => {
+    await Likes.findByPk(req.params.id).then((like) => {
             like.destroy();
         }).then(() => {
             res.json("deleted");
