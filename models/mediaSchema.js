@@ -6,7 +6,6 @@ fileUrl:Sequelize.STRING,
 duration:Sequelize.INTEGER,
 isVideo : Sequelize.BOOLEAN,
 postID : Sequelize.INTEGER
-
 }, { sequelize, modelName: 'media' });
 
 module.exports = Media;
