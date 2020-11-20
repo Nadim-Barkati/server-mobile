@@ -8,7 +8,9 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
+// helmet
+// sequelize
+// 
 
 app.use('/User', require("./routes/User.js"));
 app.use('/Media', require("./routes/media.js"));

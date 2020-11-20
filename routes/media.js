@@ -4,6 +4,9 @@ const Media = require('../models/mediaSchema');
 
 
 router.get('/', async (req, res) => {
+  //it must be maybe media instead of user!
+  //can we add acondition
+
     await Media.findAll().then((media) => res.json(media))
   })
   router.get('/:id', async (req, res) => {
@@ -15,6 +18,10 @@ router.get('/', async (req, res) => {
         fileUrl:req.body.fileUrl,
         duration:req.body.duration,
         isVideo : req.body.isVideo,
+        postID : req.body.post,
+        //it must be maybe media instead of user!
+    }).then((user) => res.json(user));
+  });
         postID : req.body.post
     })
     .then((adress) => res.json(adress))

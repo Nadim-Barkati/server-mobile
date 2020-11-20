@@ -1,17 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const Comment = require('../models/CommentSchema');
+const Op=sequelize.Sequelize.Op
 
+//get all comments
 router.get('/', async(req, res) => {
     await Comment.findAll().then((comments) => res.json(comments))
         .catch((err) => console.log(err))
 })
 
+
+//get comments by id
 router.get('/:id', async(req, res) => {
     await Comment.findByPk(req.params.id).then((comments) => res.json(comments))
         .catch((err) => console.log(err))
 })
 
+
+//add a comment
 router.post('/addComment', async(req, res) => {
     console.log(req.body)
     await Comment.create({
@@ -23,10 +29,13 @@ router.post('/addComment', async(req, res) => {
         .catch((err) => console.log(err))
 })
 
+
+
+//update a comment
 router.put('/:id', async(req, res) => {
     Comment.findByPk(req.params.id).then(() => {
         comments.update({
-            content: req.body.Content,
+            content: req.body.content,
            
             }).then((comments) => {
                 res.json(comments);
@@ -35,6 +44,8 @@ router.put('/:id', async(req, res) => {
         .catch((err) => console.log(err))
 })
 
+
+//delete a comment
 router.delete('/:id', async(req, res) => {
     await Comment.findByPk(req.params.id).then((comments) => {
             comments.destroy();
@@ -44,8 +55,12 @@ router.delete('/:id', async(req, res) => {
         .catch((err) => console.log(err))
 });
 
+
+//delete comments for a specific userId
 router.delete('/', async(req, res) => {
-    await Comment.destroy({ where: {}, truncate: true }).then(() => res.json("cleared"))
+    const userId=req.body.userId;
+    var condition = userId ? { userId: { [Op.like]: `%${userId}%` } } : null;
+    await Comment.destroy({ where: {condition}, truncate: true }).then(() => res.json("cleared"))
         .catch((err) => console.log(err))
 });
 
