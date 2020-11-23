@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const {User,Post} = sequelize.import('../models')
+const {User} = require('../database1/models')
 router.get('/', async (req, res) => {
     await User.findAll().then((users) => res.json(users))
   })

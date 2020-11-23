@@ -10,19 +10,6 @@ console.log(config)
 const db = {};
 
 
-// const env = process.env.NODE_ENV || "development";
-// console.log("env: ", env);
-
-// const configPath = path.join(__dirname, '..', 'config', 'config.json');
-// console.log("configPath: ", configPath);
-
-// const configObj = require(configPath);
-// console.log("configObj: ", configObj);
-
-// const config = configObj[env];
-// console.log("config: ", config);
-
-// ////////
 
 
 let sequelize;
