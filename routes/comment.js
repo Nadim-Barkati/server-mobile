@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Comment = require('../models/CommentSchema');
-const Op=sequelize.Sequelize.Op
+const { cloudinary } = config.get('cloudinary.config');
+const Sequelize = require('sequelize');
+const Op=Sequelize.Op
 
 //get all comments
 router.get('/', async(req, res) => {
@@ -33,7 +35,7 @@ router.post('/addComment', async(req, res) => {
 
 //update a comment
 router.put('/:id', async(req, res) => {
-    Comment.findByPk(req.params.id).then(() => {
+    Comment.findByPk(req.params.id).then((comments) => {
         comments.update({
             content: req.body.content,
            

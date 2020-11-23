@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
+const config = require('config');
+const dbConfig = config.get('postgres');
 
-const sequelize = new Sequelize("b7ntfkr2a8u3hwajcm3s", "uvullsjgrdrwg4q3", "lCrNLDAxMglq1SQrckm1", {
-    host:"b7ntfkr2a8u3hwajcm3s-mysql.services.clever-cloud.com",
-
+const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
+    host:dbConfig.host,
     dialect: 'mysql',
     logging: false,
 });
