@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Comment = require('../models/CommentSchema');
+const { cloudinary } = config.get('cloudinary.config');
 const Sequelize = require('sequelize');
 const Op=Sequelize.Op
 
