@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/PostSchema');
+const Post = require('../models/post');
 const Sequelize = require('sequelize');
 const Op=Sequelize.Op
 
