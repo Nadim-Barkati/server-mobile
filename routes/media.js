@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Media = require('../models/mediaSchema');
+const {Media} = require('../database1/models')
 
 
 router.get('/', async (req, res) => {
