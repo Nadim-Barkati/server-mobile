@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       })
     }
+
   };
   User.init({
     firstName: DataTypes.STRING,
