@@ -13,11 +13,11 @@ app.use(cors());
 // 
 
 app.use('/User', require("./routes/user.js"));
-// app.use('/Media', require("./routes/media.js"));
-// app.use('/Adress', require("./routes/adress.js"));
-// app.use('/Comment',require("./routes/CommentsRoutes.js"));
-// app.use('/Post',require("./database1/routes/PostRoutes.js"));
-// app.use('/Likes',require("./routes/LikesRoutes.js"));
+app.use('/Post',require("./routes/post.js"));
+app.use('/Media', require("./routes/media.js"));
+app.use('/Adress', require("./routes/adress.js"));
+app.use('/Comment',require("./routes/comment.js"));
+app.use('/Like',require("./routes/like.js"));
 
 app.get('/', function (req,res) {
   res.send('Hello');

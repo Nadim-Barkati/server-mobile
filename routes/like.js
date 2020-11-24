@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Likes = require('../models/LikesSchema');
+const {Like} = require('../database1/models')
 const Sequelize = require('sequelize');
 const Op=Sequelize.Op
 
@@ -8,19 +8,19 @@ const Op=Sequelize.Op
 //add a like
 router.post('/addLike', async(req, res) => {
     console.log(req.body)
-    await Likes.create({
+    await Like.create({
             IdPost: req.body.IdPost,
             userId: req.body.userId,
         })
-        .then((like) => res.json(like))
+        .then((likes) => res.json(likes))
         .catch((err) => console.log(err))
 })
 
 
 //delete post
 router.delete('/:id', async(req, res) => {
-    await Likes.findByPk(req.params.id).then((like) => {
-            like.destroy();
+    await Like.findByPk(req.params.id).then((likes) => {
+            likes.destroy();
         }).then(() => {
             res.json("deleted");
         })
@@ -32,7 +32,7 @@ router.delete('/:id', async(req, res) => {
 router.delete('/', async(req, res) => {
     const userId=req.body.userId;
     var condition = userId ? { userId: { [Op.like]: `%${userId}%` } } : null;
-    await like.destroy({ where: {condition}, truncate: true }).then(() => res.json("cleared"))
+    await Like.destroy({ where: {condition}, truncate: true }).then(() => res.json("cleared"))
         .catch((err) => console.log(err))
 });
 
