@@ -1,24 +1,21 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('media', {
+    await queryInterface.createTable('posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fileUrl: {
+      content: {
         type: Sequelize.STRING
       },
-      duration: {
+      userId: {
         type: Sequelize.INTEGER
       },
-      isVideo: {
-        type: Sequelize.BOOLEAN
-      },
-      postId: {
-        type: Sequelize.INTEGER
+      fileUrl: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +28,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('media');
+    await queryInterface.dropTable('posts');
   }
 };
