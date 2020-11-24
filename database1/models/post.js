@@ -15,16 +15,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       })
-      Post.hasMany(models.Like, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      })
       Post.hasMany(models.Comment, {
-        foreignKey: 'userId',
+        foreignKey: 'PostId',
         onDelete: 'CASCADE'
       })
-      Post.hasMany(models.Media, {
-        foreignKey: 'userId',
+      Post.hasMany(models.Like, {
+        foreignKey: 'PostId',
+        onDelete: 'CASCADE'
+      })
+      Post.hasOne(models.Media, {
+        foreignKey: 'PostId',
         onDelete: 'CASCADE'
       })
     }
