@@ -9,7 +9,7 @@ const Op=Sequelize.Op
 router.post('/addPost', async(req, res) => {
     console.log(req.body)
     await Post.create({
-            content: req.body. content,
+            content: req.body.content,
             userId: req.body.userId,
             urlMedia: req.body.urlMedia,
         })
