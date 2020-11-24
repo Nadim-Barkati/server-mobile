@@ -15,12 +15,25 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       })
+      Post.hasMany(models.Comment, {
+        foreignKey: 'commentId',
+        onDelete: 'CASCADE'
+      })
+      Post.hasMany(models.Like, {
+        foreignKey: 'likeId',
+        onDelete: 'CASCADE'
+      })
+      Post.hasOne(models.Media, {
+        foreignKey: 'mediaId',
+        onDelete: 'CASCADE'
+      })
     }
   };
   Post.init({
    content: DataTypes.STRING,
    userId: DataTypes.INTEGER,
    urlMedia: DataTypes.STRING,
+   //add mediaId!!!
    commentId: DataTypes.INTEGER,
    likeId: DataTypes.INTEGER
 }, {

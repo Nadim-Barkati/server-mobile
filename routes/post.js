@@ -18,7 +18,7 @@ router.post('/addPost', async(req, res) => {
 })
 
 
-//get all posts ²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²for a userId
+//get all posts for a userId
 router.get('/', async(req, res) => {
     const userId=req.body.userId;
     var condition = userId ? { userId: { [Op.like]: `%${userId}%` } } : null;
