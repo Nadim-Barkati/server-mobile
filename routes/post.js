@@ -12,6 +12,8 @@ router.post('/addPost', async(req, res) => {
             content: req.body. content,
             userId: req.body.userId,
             urlMedia: req.body.urlMedia,
+            commentId: req.body.commentId,
+            likeId: req.body.likeId
         })
         .then((post) => res.json(post))
         .catch((err) => console.log(err))
@@ -19,12 +21,16 @@ router.post('/addPost', async(req, res) => {
 
 
 //get all posts for a userId
-router.get('/', async(req, res) => {
-    const userId=req.body.userId;
-    var condition = userId ? { userId: { [Op.like]: `%${userId}%` } } : null;
-    await Post.findAll({ where: condition }).then((post) => res.json(post))
-        .catch((err) => console.log(err))
-})
+// router.get('/', async(req, res) => {
+//     const userId=req.body.userId;
+//     var condition = userId ? { userId: { [Op.like]: `%${userId}%` } } : null;
+//     await Post.findAll({ where: condition }).then((post) => res.json(post))
+//         .catch((err) => console.log(err))
+// })
+router.get('/', async (req, res) => {
+    await Post.findAll().then((users) => res.json(users))
+  })
+
 
 
 //get post by id
