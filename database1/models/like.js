@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'PostId',
         onDelete: 'CASCADE'
       })
+      //add relation
       Like.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
