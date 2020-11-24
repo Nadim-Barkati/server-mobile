@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Media.belongsTo(models.Post, {
-        foreignKey: 'postId',
-        onDelete: 'CASCADE'
-      })
     }
   };
   Media.init({
