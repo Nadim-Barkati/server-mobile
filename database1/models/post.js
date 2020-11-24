@@ -16,15 +16,15 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       })
       Post.hasMany(models.Comment, {
-        foreignKey: 'commentId',
+        foreignKey: 'PostId',
         onDelete: 'CASCADE'
       })
       Post.hasMany(models.Like, {
-        foreignKey: 'likeId',
+        foreignKey: 'PostId',
         onDelete: 'CASCADE'
       })
       Post.hasOne(models.Media, {
-        foreignKey: 'mediaId',
+        foreignKey: 'PostId',
         onDelete: 'CASCADE'
       })
     }
@@ -33,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
    content: DataTypes.STRING,
    userId: DataTypes.INTEGER,
    urlMedia: DataTypes.STRING,
-   //add mediaId!!!
    commentId: DataTypes.INTEGER,
    likeId: DataTypes.INTEGER
 }, {
