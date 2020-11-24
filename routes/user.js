@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
           dateOfBirth: req.body.dateOfBirth, 
            phoneNumber: req.body.phoneNumber,
             description: req.body.description,
-             QRCode: req.body.QRCode,
+            QrCode: req.body.QrCode,
               profileImage: req.body.profileImage,
                coverImage: req.body.coverImage,
     }).then((user) => res.json(user));
