@@ -9,15 +9,20 @@ const Op=Sequelize.Op
 router.post('/addLike', async(req, res) => {
     console.log(req.body)
     await Like.create({
-            IdPost: req.body.IdPost,
+            PostId: req.body.PostId,
             userId: req.body.userId,
         })
         .then((likes) => res.json(likes))
         .catch((err) => console.log(err))
 })
 
+//get all likes
+router.get('/getLike', async(req, res) => {
+    await Like.findAll().then((like) => res.json(like))
+        .catch((err) => console.log(err))
+})
 
-//delete post
+//delete like
 router.delete('/:id', async(req, res) => {
     await Like.findByPk(req.params.id).then((likes) => {
             likes.destroy();

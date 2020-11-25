@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Like.init({
+    Like:DataTypes.BOOLEAN,
     PostId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
