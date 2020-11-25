@@ -20,6 +20,10 @@ module.exports = {
       postId: {
         type: Sequelize.INTEGER
       },
+      like: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
