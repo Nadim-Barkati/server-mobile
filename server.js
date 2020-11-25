@@ -2,7 +2,7 @@ const express = require('express') ;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-require('dotenv').config()
+// require('dotenv').config()
 
 const PORT = 3000; 
 app.use(bodyParser.json());
@@ -14,7 +14,6 @@ app.use(cors());
 
 app.use('/User', require("./routes/user.js"));
 app.use('/Post',require("./routes/post.js"));
-app.use('/Media', require("./routes/media.js"));
 app.use('/Adress', require("./routes/adress.js"));
 app.use('/Comment',require("./routes/comment.js"));
 app.use('/Like',require("./routes/like.js"));
