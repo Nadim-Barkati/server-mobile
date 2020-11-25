@@ -15,18 +15,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       })
-      User.hasMany(models.Comment,{
-        foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      })
-      User.hasMany(models.Like,{
-        foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      })
-      User.hasMany(models.Media,{
-        foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      })
+      // User.hasMany(models.Comment,{
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE'
+      // })
+      // User.hasMany(models.Like,{
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE'
+      // })
+      // User.hasMany(models.Media,{
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE'
+      // })
     }
 
   };
