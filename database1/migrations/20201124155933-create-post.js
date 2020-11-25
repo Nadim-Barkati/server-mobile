@@ -17,6 +17,10 @@ module.exports = {
       fileUrl: {
         type: Sequelize.STRING
       },
+      like: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
