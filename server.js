@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 // require('dotenv').config()
-
-const PORT = 3000; 
+const server = require("http").createServer(app);
+const PORT = process.env.PORT; 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -18,12 +18,10 @@ app.use('/Adress', require("./routes/adress.js"));
 app.use('/Comment',require("./routes/comment.js"));
 app.use('/Like',require("./routes/like.js"));
 
-app.get('/', function (req,res) {
-  res.send('Hello');
-});
 
 
 
-app.listen(process.env.PORT || PORT, () => {
-    console.log(`listening on port http://localhost:${PORT}`);
+
+server.listen( PORT, () => {
+    console.log(`listening on port ${PORT}`);
   });
