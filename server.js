@@ -18,11 +18,7 @@ app.use('/Adress', require("./routes/adress.js"));
 app.use('/Comment',require("./routes/comment.js"));
 app.use('/Like',require("./routes/like.js"));
 
-app.get('/',(req,res)=>{
-res.send(data)
-console.log(data);
-})
-
+  
 
 server.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
