@@ -1,4 +1,4 @@
-  'use strict';
+'use strict';
 const {
   Model
 } = require('sequelize');
@@ -11,24 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Post, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      })
-      // User.hasMany(models.Comment,{
-      //   foreignKey: 'userId',
-      //   onDelete: 'CASCADE'
-      // })
-      // User.hasMany(models.Like,{
-      //   foreignKey: 'userId',
-      //   onDelete: 'CASCADE'
-      // })
-      // User.hasMany(models.Media,{
-      //   foreignKey: 'userId',
-      //   onDelete: 'CASCADE'
-      // })
     }
-
   };
   User.init({
     firstName: DataTypes.STRING,
@@ -36,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     userName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    confirmPassword: DataTypes.STRING,
     dateOfBirth: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
     description: DataTypes.STRING,
-    QrCode: DataTypes.STRING,
     profileImage: DataTypes.STRING,
     coverImage: DataTypes.STRING
   }, {
