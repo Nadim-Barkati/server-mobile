@@ -2,13 +2,17 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const {User} = require('../database1/models')
+
+
 router.get('/', async (req, res) => {
     await User.findAll().then((users) => res.json(users))
   })
+
   router.get('/:id', async (req, res) => {
     console.log(User)
       await User.findOne({ id: req.params.id })
   })
+  
   router.post("/SignUp", async (req, res) => {
     const emailExist = await User.findOne({
       where: { email: req.body.email },
