@@ -12,6 +12,8 @@ router.post('/addPost', async(req, res) => {
             content: req.body.content,
             userId: req.body.userId,
             urlMedia: req.body.urlMedia,
+            commentId: req.body.commentId,
+            likeId: req.body.likeId
         })
         .then((post) => res.json(post))
         .catch((err) => console.log(err))
