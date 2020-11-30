@@ -27,17 +27,23 @@ cloudinary.config({
 app.post("/upload", function(req, res, next) {
   const file = req.files.photo;
   console.log(file);
-  file.mv('./uploads/'+file.name, function(err,result){
-    console.log(result)
-    if (res) {
-      res.send({
-        success: true,
-        message:'File uploaded successfully.'
-      });
-     
-    }
-    // throw err;
+  cloudinary.uploader.upload(file.tempFilePath, function(err, result) {
+       res.send ({
+          success: true,
+          result
+       });
   })
+  // file.mv('./uploads/'+file.name, function(err,result){
+  //   console.log(result)
+  //   if (res) {
+  //     res.send({
+  //       success: true,
+  //       message:'File uploaded successfully.'
+  //     });
+     
+  //   }
+  //   // throw err;
+  // })
 })
 app.use('/User', require("./routes/user.js"));
 app.use('/Post',require("./routes/post.js"));
