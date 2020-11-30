@@ -23,9 +23,6 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      confirmPassword: {
-        type: Sequelize.STRING
-      },
       dateOfBirth: {
         type: Sequelize.STRING
       },
@@ -35,11 +32,19 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      isActif: {
+        type: Sequelize.BOOLEAN
+      },
       profileImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'https://res.cloudinary.com/vic2021/image/upload/v1606473759/Avatar/avatardefault_92824_pn2wp0.png'
       },
       coverImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'https://res.cloudinary.com/vic2021/image/upload/v1606473818/Cover%20Image/images_f23o3w.jpg'
+      },
+      messageId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
