@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { post } = require('../../routes/User');
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
    
@@ -10,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       
+    }),
+    Post.hasMany(models.Like, {
+      foreignKey: 'postId'
+    }),
+    Post.hasMany(models.Comment, {
+      foreignKey:'postId'
     })
   }
   };
