@@ -10,7 +10,25 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Post, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      })
+      // User.hasMany(models.Comment,{
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE'
+      // })
+      // User.hasMany(models.Like,{
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE'
+      // })
+      // User.hasMany(models.Media,{
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE'
+      // })
+      User.belongsToMany(models.Conversation,{
+        through: 'UserConversations' 
+      })
     }
   };
   User.init({
@@ -19,12 +37,13 @@ module.exports = (sequelize, DataTypes) => {
     userName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    confirmPassword: DataTypes.STRING,
     dateOfBirth: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
     description: DataTypes.STRING,
+    isActif: DataTypes.BOOLEAN,
     profileImage: DataTypes.STRING,
-    coverImage: DataTypes.STRING
+    coverImage: DataTypes.STRING,
+    messageId: DataTypes.STRING  
   }, {
     sequelize,
     modelName: 'User',
