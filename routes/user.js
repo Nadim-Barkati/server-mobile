@@ -5,14 +5,15 @@ const dotenv = require("dotenv");
 const bcrypt = require('bcryptjs');
 const {User} = require('../database1/models')
 dotenv.config();
-
 router.get('/', async (req, res) => {
     await User.findAll().then((users) => res.json(users))
   })
+
   router.get('/:id', async (req, res) => {
     console.log(User)
       await User.findOne({ id: req.params.id })
   })
+  
   router.post("/SignUp", async (req, res) => {
     console.log(req.body)
     const UserNameExist = await User.findOne({
