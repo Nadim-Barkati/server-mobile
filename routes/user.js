@@ -8,12 +8,10 @@ dotenv.config();
 router.get('/', async (req, res) => {
     await User.findAll().then((users) => res.json(users))
   })
-
   router.get('/:id', async (req, res) => {
     console.log(User)
       await User.findOne({ id: req.params.id })
   })
-  
   router.post("/SignUp", async (req, res) => {
     console.log(req.body)
     if(req.body.userName=== ""&& req.body.email==="" && req.body.phoneNumber===""){
@@ -65,15 +63,43 @@ router.get('/', async (req, res) => {
                zipCode: req.body.zipCode
     }).then((user) => res.json(user));
   });
+
+
+
   router.post("/login", async (req, res) => {
+
+    if(req.body.userName!=='' && req.body.email==='' && req.body.phoneNumber ==='') {
     const user = await User.findOne({ where: {userName: req.body.userName} });
     if (!user) return res.status(400).send("Invalid userName");
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send("Invalid password ");
-    const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
-    res.header('auth_token',token).send({'token':token , 'id':user.id})
-    console.log(token)
+    // const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
+    //res.header('auth_token',token).send({'token':token , 'id':user.id})
+    res.json(user)
+    // console.log(token)
+
+    }else if(req.body.email!=="" && req.body.userName ==='' && req.body.phoneNumber ===''){
+
+      const user = await User.findOne({ where: {email: req.body.email} });
+      if (!user) return res.status(400).send("Invalid userName");
+      const validPass = await bcrypt.compare(req.body.password, user.password);
+      if (!validPass) return res.status(400).send("Invalid password ");      
+      res.json(user)     
+
+    }else if(req.body.phoneNumber!=="" && req.body.email ==='' && req.body.userName
+     ===''){
+
+      const user = await User.findOne({ where: {email: req.body.phoneNumber} });
+      if (!user) return res.status(400).send("Invalid userName");
+      const validPass = await bcrypt.compare(req.body.password, user.password);
+      if (!validPass) return res.status(400).send("Invalid password ");      
+      res.json(user) 
+
+    }
   });
+
+
+
   router.put("/:id", async (req, res) => {
     User.findByPk(req.params.id).then((users) => {
       users
