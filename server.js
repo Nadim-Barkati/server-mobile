@@ -48,10 +48,14 @@ app.post("/upload", function(req, res, next) {
 })
 app.use('/User', require("./routes/user.js"));
 app.use('/Post',require("./routes/post.js"));
-app.use('/Adress', require("./routes/adress.js"));
 app.use('/Comment',require("./routes/comment.js"));
 app.use('/Like',require("./routes/like.js"));
+app.use('/Conversation',require("./routes/conversation.js"));
+app.use('/Message',require("./routes/message.js"));
 
+app.get('/',(req,res) =>{
+  req.send('hello')
+})
   
 
 server.listen(PORT, () => {
