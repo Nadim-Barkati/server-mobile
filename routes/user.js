@@ -16,24 +16,36 @@ router.get('/', async (req, res) => {
   
   router.post("/SignUp", async (req, res) => {
     console.log(req.body)
+    if(req.body.userName=== ""&& req.body.email==="" && req.body.phoneNumber===""){
+      return res.status(403).send("please enter your email or username or mobile phone") 
+    }
     const UserNameExist = await User.findOne({
       where: { userName: req.body.userName}
     });
-    if(UserNameExist){
-      return res.status(400).send("User already exist");
-    };
-    const phoneNumberExist = await User.findOne({
-      where: { phoneNumber: req.body.phoneNumber},
-    });
-    if(phoneNumberExist){
-      return res.status(400).send("User already exist");
-    };
-    const emailExist = await User.findOne({
-      where: { email: req.body.email},
-    });
-    if(emailExist){
-      return res.status(400).send("User already exist");
-    };  
+    if (req.body.userName !== "") {
+      const UserNameExist = await User.findOne({
+        where: { userName: req.body.userName },
+      });
+      if (UserNameExist) {
+        return res.status(400).send("Username already exist");
+      }
+    }
+    if (req.body.phoneNumber !== "") {
+      const phoneNumberExist = await User.findOne({
+        where: { phoneNumber: req.body.phoneNumber },
+      });
+      if (phoneNumberExist) {
+        return res.status(400).send("User already exist");
+      }
+    }
+    if (req.body.email !== "") {
+      const emailExist = await User.findOne({
+        where: { email: req.body.email },
+      });
+      if (emailExist) {
+        return res.status(400).send("User already exist");
+      }
+    }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
     await User.create({
