@@ -62,13 +62,19 @@ router.get('/', async (req, res) => {
                zipCode: req.body.zipCode
     }).then((user) => res.json(user));
   });
+
+
+
   router.post("/login", async (req, res) => {
+
     if(req.body.userName!=='' && req.body.email==='' && req.body.phoneNumber ==='') {
     const user = await User.findOne({ where: {userName: req.body.userName} });
     if (!user) return res.status(400).send("Invalid userName");
     const validPass = await bcrypt.compare(req.body.password, user.password);
+
     if(validPass.length!==8) return res.status(400).send("your password should have 8 characters");
     else if (!validPass) return res.status(400).send("Invalid password ");
+
     // const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
     //res.header('auth_token',token).send({'token':token , 'id':user.id})
     res.send(user)
@@ -88,8 +94,12 @@ router.get('/', async (req, res) => {
       if(validPass.length!==8) return res.status(400).send("your password should have 8 characters");
       else if (!validPass) return res.status(400).send("Invalid password ");      
       res.send(user) 
+
     }
   });
+
+
+
   router.put("/:id", async (req, res) => {
     User.findByPk(req.params.id).then((users) => {
       users
