@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 const bcrypt = require('bcryptjs');
 const {User} = require('../database1/models')
-
-
+dotenv.config();
 router.get('/', async (req, res) => {
     await User.findAll().then((users) => res.json(users))
   })
@@ -41,50 +42,49 @@ router.get('/', async (req, res) => {
         userName:req.body.userName,
         email: req.body.email,
          password: hashPassword,
-         confirmPassword: hashPassword,
           dateOfBirth: req.body.dateOfBirth, 
            phoneNumber: req.body.phoneNumber,
             description: req.body.description,
               profileImage: req.body.profileImage,
                coverImage: req.body.coverImage,
+               address: req.body.address,
+               city: req.body.city,
+               country: req.body.country,
+               zipCode: req.body.zipCode
     }).then((user) => res.json(user));
   });
   router.post("/login", async (req, res) => {
-    const user = await User.findOne({ where: {userName: req.body.userName} });
-    if (!user) return res.status(400).send("Invalid userName or email address");
-    const userEmail = await User.findOne({where: {email: req.body.email}});
-    if (!userEmail) return res.status(400).send("Invalid userName or email address")
+    const user = await User.findOne({ where: {userName: req.body.userName,email: req.body.email,phoneNumber: req.body.phoneNumber} });
+    if (!user) return res.status(400).send("Invalid userName or email address or mobile phone");
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send("Invalid password ");
-    return res.status(200).send("welcome");
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_TOKEN);
+    res.header('auth_token',token).send({'token':token , 'id':user.id})
+    console.log(token)
   });
   router.put("/:id", async (req, res) => {
     User.findByPk(req.params.id).then((users) => {
       users
         .update({
+          firstName:req.body.firstName,
             lastName: req.body.lastName,
             userName:req.body.userName,
             email: req.body.email,
              password: req.body.password,
-             confirmPassword: req.body.confirmPassword,
               dateOfBirth: req.body.dateOfBirth,
                phoneNumber: req.body.phoneNumber,
                 description: req.body.description,
                   profileImage: req.body.profileImage,
                    coverImage: req.body.coverImage,
+                   isActif: req.body.isActif,
+                   address: req.body.address,
+                   city: req.body.city,
+                   country: req.body.country,
+                   zipCode: req.body.zipCode
         })
         .then((users) => {
           res.json(users);
         });
     });
-  });
-  router.delete("/:id", async (req, res) => {
-    await User.findByPk(req.params.id)
-      .then((user) => {
-        user.destroy();
-      })
-      .then(() => {
-        res.json("deleted");
-      });
   });
   module.exports = router;
