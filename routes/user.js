@@ -1,19 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const bcrypt = require('bcryptjs');
 const {User} = require('../database1/models')
-dotenv.config();
 router.get('/', async (req, res) => {
     await User.findAll().then((users) => res.json(users))
   })
-
   router.get('/:id', async (req, res) => {
     console.log(User)
       await User.findOne({ id: req.params.id })
   })
-  
   router.post("/SignUp", async (req, res) => {
     console.log(req.body)
     if(req.body.userName=== ""&& req.body.email==="" && req.body.phoneNumber===""){
@@ -66,13 +63,32 @@ router.get('/', async (req, res) => {
     }).then((user) => res.json(user));
   });
   router.post("/login", async (req, res) => {
+    if(req.body.userName!=='' && req.body.email==='' && req.body.phoneNumber ==='') {
     const user = await User.findOne({ where: {userName: req.body.userName} });
     if (!user) return res.status(400).send("Invalid userName");
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).send("Invalid password ");
-    const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
-    res.header('auth_token',token).send({'token':token , 'id':user.id})
-    console.log(token)
+    if(validPass.length!==8) return res.status(400).send("your password should have 8 characters");
+    else if (!validPass) return res.status(400).send("Invalid password ");
+    // const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
+    //res.header('auth_token',token).send({'token':token , 'id':user.id})
+    res.send(user)
+    // console.log(token)
+    }else if(req.body.email!=="" && req.body.userName ==='' && req.body.phoneNumber ===''){
+      const user = await User.findOne({ where: {email: req.body.email} });
+      if (!user) return res.status(400).send("Invalid userName");
+      const validPass = await bcrypt.compare(req.body.password, user.password);
+      if(validPass.length!==8) return res.status(400).send("your password should have 8 characters");
+      else if (!validPass) return res.status(400).send("Invalid password ");      
+      res.send(user)     
+    }else if(req.body.phoneNumber!=="" && req.body.email ==='' && req.body.userName
+     ===''){
+      const user = await User.findOne({ where: {email: req.body.phoneNumber} });
+      if (!user) return res.status(400).send("Invalid userName");
+      const validPass = await bcrypt.compare(req.body.password, user.password);
+      if(validPass.length!==8) return res.status(400).send("your password should have 8 characters");
+      else if (!validPass) return res.status(400).send("Invalid password ");      
+      res.send(user) 
+    }
   });
   router.put("/:id", async (req, res) => {
     User.findByPk(req.params.id).then((users) => {
