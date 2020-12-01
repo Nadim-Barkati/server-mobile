@@ -54,11 +54,11 @@ router.get('/', async (req, res) => {
     }).then((user) => res.json(user));
   });
   router.post("/login", async (req, res) => {
-    const user = await User.findOne({ where: {userName: req.body.userName,email: req.body.email,phoneNumber: req.body.phoneNumber} });
-    if (!user) return res.status(400).send("Invalid userName or email address or mobile phone");
+    const user = await User.findOne({ where: {userName: req.body.userName} });
+    if (!user) return res.status(400).send("Invalid userName");
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send("Invalid password ");
-    const token = jwt.sign({ id: user.id }, process.env.SECRET_TOKEN);
+    const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
     res.header('auth_token',token).send({'token':token , 'id':user.id})
     console.log(token)
   });
