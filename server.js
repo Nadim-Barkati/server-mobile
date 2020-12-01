@@ -11,8 +11,7 @@ const PORT =process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-// helmet
-// sequelize
+
 
 app.use(fileupload({
   useTempFiles: true,
@@ -53,9 +52,7 @@ app.use('/Like',require("./routes/like.js"));
 app.use('/Conversation',require("./routes/conversation.js"));
 app.use('/Message',require("./routes/message.js"));
 
-app.get('/',(req,res) =>{
-  req.send('hello')
-})
+
   
 
 server.listen(PORT, () => {
