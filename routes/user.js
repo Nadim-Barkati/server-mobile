@@ -75,7 +75,7 @@ router.get('/', async (req, res) => {
     if (!validPass) return res.status(400).send("Invalid password ");
     // const token = jwt.sign({ id: user.id }, "" +process.env.SECRET_TOKEN);
     //res.header('auth_token',token).send({'token':token , 'id':user.id})
-    res.json(user)
+    res.send(user)
     // console.log(token)
 
     }else if(req.body.email!=="" && req.body.userName ==='' && req.body.phoneNumber ===''){
@@ -84,7 +84,7 @@ router.get('/', async (req, res) => {
       if (!user) return res.status(400).send("Invalid userName");
       const validPass = await bcrypt.compare(req.body.password, user.password);
       if (!validPass) return res.status(400).send("Invalid password ");      
-      res.json(user)     
+      res.send(user)     
 
     }else if(req.body.phoneNumber!=="" && req.body.email ==='' && req.body.userName
      ===''){
@@ -93,7 +93,7 @@ router.get('/', async (req, res) => {
       if (!user) return res.status(400).send("Invalid userName");
       const validPass = await bcrypt.compare(req.body.password, user.password);
       if (!validPass) return res.status(400).send("Invalid password ");      
-      res.json(user) 
+      res.send(user) 
 
     }
   });
