@@ -11,13 +11,7 @@
     "api_key":"434786848137159 ",
    "api_secret":"2SNCTyZOAMHIKCtYRmVuXqy-o_Y"     
   },
-  "postgress": {
-    "username": "root",
-    "password": "12345",
-    "database": "vic",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
+
   "test": {
     "username": "root",
     "password": "12345",
